@@ -4,9 +4,17 @@ python:
   - "2.7"
   - "3.2"
   - "3.3"
+before_install:
+  - git clone https://github.com/NixOS/patchelf
+  - pushd patchelf
+  - ./bootstrap.sh
+  - ./configure && make
+  - sudo make install
+  - popd
 install:
   - python setup.py install
   - pip install -r dev_requirements.txt
+  - "if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install unittest2; fi"
 script: nosetests --with-coverage --cover-package=elfrewriter elfrewriter
 
 notifications:
