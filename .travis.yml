@@ -1,0 +1,17 @@
+language: python
+python:
+  - "2.6"
+  - "2.7"
+  - "3.2"
+  - "3.3"
+install:
+  - python setup.py install
+  - pip install -r dev_requirements.txt
+script: nosetests --with-coverage --cover-package=elfrewriter elfrewriter
+
+notifications:
+  email:
+    recipients:
+      - davidc@enthought.com
+    on_success: change
+    on_failure: always
