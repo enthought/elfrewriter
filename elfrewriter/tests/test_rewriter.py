@@ -1,8 +1,13 @@
 import contextlib
 import shutil
 import subprocess
+import sys
 import tempfile
-import unittest
+
+if sys.version_info[:2] < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 import os.path as op
 

@@ -14,6 +14,7 @@ before_install:
 install:
   - python setup.py install
   - pip install -r dev_requirements.txt
+  - "if [[ $TRAVIS_PYTHON_VERSION == '2.6' ]]; then pip install unittest2; fi"
 script: nosetests --with-coverage --cover-package=elfrewriter elfrewriter
 
 notifications:
