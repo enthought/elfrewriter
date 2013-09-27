@@ -1,0 +1,13 @@
+PYTHON_INC := $(shell python -c "from distutils.sysconfig import get_python_inc; print get_python_inc()")
+
+CFLAGS = -I$(PYTHON_INC) -g -O0
+
+default: main_abs_rpath
+
+main_abs_rpath: src/empty_main.c
+	$(CC) $(CFLAGS) $< -o $@ -Wl,-rpath,/yomama
+
+clean:
+	rm -f *.so
+	rm -f *.o
+	rm -f main_abs_rpath
