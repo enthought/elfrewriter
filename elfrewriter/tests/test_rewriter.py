@@ -78,9 +78,8 @@ class TestELFRewriter(unittest.TestCase):
             copy = op.join(d, op.basename(MAIN_ABS_RPATH))
             shutil.copy(MAIN_ABS_RPATH, copy)
 
-            rewriter = ELFRewriter(copy)
-            rewriter.rpaths = []
-            rewriter.commit()
+            with ELFRewriter(copy) as rewriter:
+                rewriter.rpaths = []
 
             rewriter = ELFRewriter(copy)
             self.assertEqual(rewriter.rpaths, [])

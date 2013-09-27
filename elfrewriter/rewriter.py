@@ -110,6 +110,12 @@ class ELFRewriter(object):
         except OSError:
             raise ELFRewriterError("Could not write changes back to {0}".format(self.filename))
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a, **kw):
+        self.commit()
+
     @property
     def rpaths_string(self):
         return PATHSEP.join(self.rpaths)
